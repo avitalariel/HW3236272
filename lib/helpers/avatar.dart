@@ -56,18 +56,18 @@ class ImageUploadsState extends State<ImageUploads> {
     return Row(children: [
       CircleAvatar(
         radius: 55,
-        backgroundColor: null,
+        backgroundColor: Colors.transparent,
         child: _photo != null || photoUrl != null
             ? ClipRRect(
                 borderRadius: BorderRadius.circular(50),
-                child: photoUrl == null
+                child: _photo != null
                     ? Image.file(
                         _photo!,
                         width: 100,
                         height: 100,
                         fit: BoxFit.fitHeight,
                       )
-                    : Image.network(photoUrl, width: 100, height: 100),
+                    : Image.network(photoUrl!, width: 100, height: 100),
               )
             : Container(
                 decoration: BoxDecoration(

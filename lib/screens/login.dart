@@ -99,7 +99,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                             await context
                                 .read<SuggestionsNotifier>()
                                 .getUserSavedSuggestions(userUid);
-                            await context.read<AuthNotifier>()
+                            await context
+                                .read<AuthNotifier>()
                                 .downloadFile(userUid);
                             if (!mounted) return;
                             Navigator.pop(context);
@@ -116,23 +117,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                   onPressed: isButtonSignupDisabled
                       ? null
                       : () async {
-                          // setState(() => isButtonSignupDisabled = true);
-                          // if (await context
-                          //         .read<AuthNotifier>()
-                          //         .signUp(_email.text, _password.text) ==
-                          //     null) {
-                          //   ScaffoldMessenger.of(context).showSnackBar(
-                          //       const SnackBar(
-                          //           content: Text('Unable to sign up.')));
-                          //   setState(() => isButtonSignupDisabled = false);
-                          // } else {
-                          //   var userUid =
-                          //       context.read<AuthNotifier>().user?.uid;
-                          //   context
-                          //       .read<SuggestionsNotifier>()
-                          //       .addUser(_email.text, userUid);
-                          //   Navigator.pop(context);
-                          // }
                           var bottomHeight =
                               MediaQuery.of(context).viewInsets.bottom;
 
@@ -166,12 +150,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         ),
                                         ElevatedButton(
                                             onPressed: () async {
-                                              print(_password.text);
-                                              print(_confirmPassword.text);
                                               if (_confirmPassword.text !=
                                                   _password.text) {
                                                 setState(() {
-                                                  print('IN!');
                                                   _validate = false;
                                                   isButtonSignupDisabled =
                                                       false;
@@ -201,9 +182,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                   await context
                                                       .read<AuthNotifier>()
                                                       .downloadFile(userUid);
-                                                  print('xxxxxx');
                                                 } catch (e) {
-                                                  print('hiiii');
+                                                  print(e);
                                                 }
                                                 if (!mounted) return;
                                                 var nav = Navigator.of(context);

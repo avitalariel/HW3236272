@@ -27,21 +27,16 @@ class AuthNotifier extends ChangeNotifier {
     _user = null;
     _auth = FirebaseAuth.instance;
     _auth.authStateChanges().listen((firebaseUser) async {
-      print('Im here');
       if (firebaseUser == null) {
-        print('Not connected');
 
         _user = null;
         _status = Status.unauthenticated;
       } else {
-        print('Connected');
 
         _user = firebaseUser;
         _status = Status.authenticated;
         await downloadFile(_user?.uid);
       }
-      print('Got here!!!');
-      print(_status);
       notifyListeners();
     });
   }
